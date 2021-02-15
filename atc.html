@@ -1,12 +1,52 @@
-<title>KCDW - France Culture</title>
-<p>That's France Culture</p>
-<audio src="http://direct.franceculture.fr/live/franceculture-midfi.mp3"
-type="audio/mpeg" controls>
-I'm sorry. You're browser doesn't support HTML5
-<code>audio</code> . </audio>
-<br>
-<p>That's Not France Culture - It's KCDW - playing in background</p>
-<audio src="http://d.liveatc.net/kcdw.mp3"
-type="audio/mpeg" autoplay loop>
-I'm sorry. You're browser doesn't support HTML5
-<code>audio</code> . </audio>
+<label for="airport">Choose an airport:</label><br>
+<select id="airport" name="airport" size="8">
+  <option value="kcdw">KCDW</option>
+  <option value="klga">KLGA</option>
+  <option value="kewr">KEWR</option>
+</select>
+<audio id="airport-audio" src="http://d.liveatc.net/kcdw.mp3"
+type="audio/mpeg" controls></audio>
+
+<p></p>
+
+<label for="radio">Choose a radio:</label><br>
+<select id="radio" name="radio" size="10">
+  <option value="france_culture">France Culture</option>
+  <option value="france_inter">France Inter</option>
+  <option value="cherie_fm">Cherie FM</option>
+  <option value="nostalgie">Nostalgie</option>
+  <option value="le_mouv">Le Mouv</option>
+  <option value="rires_chansons">Rires et Chansons</option>
+  <option value="cnn">CNN</option>
+</select>
+<audio id="radio-audio"
+src="http://direct.franceculture.fr/live/franceculture-midfi.mp3"
+type="audio/mpeg" controls></audio>
+
+
+<script type="text/javascript">
+  airport.onclick = function(e) {
+    e.preventDefault();
+    var elm = e.target;
+    var audio = document.getElementById('airport-audio');
+    audio.src = `http://d.liveatc.net/${elm.getAttribute('value')}.mp3`;
+    audio.play(); //call this to play the song right away
+  };
+
+  var radio_mapping = {
+    "france_culture": "http://direct.franceculture.fr/live/franceculture-midfi.mp3",
+    "france_inter": "http://direct.franceinter.fr/live/franceinter-midfi.mp3",
+    "cherie_fm": "http://cdn.nrjaudio.fm/audio1/fr/30201/mp3_128.mp3?origine=fluxradios",
+    "nostalgie": "http://cdn.nrjaudio.fm/audio1/fr/30601/mp3_128.mp3?origine=fluxradios",
+    "le_mouv": "http://direct.mouv.fr/live/mouv-midfi.mp3",
+    "rires_chansons": "http://cdn.nrjaudio.fm/audio1/fr/30401/mp3_128.mp3?origine=fluxradios",
+    "cnn": "https://tunein.streamguys1.com/cnn-new?ads.cust_params=partnerId%253dydvgH5BP%2526ads_partner_alias%253dydvgH5BP%2526premium%253dfalse%2526abtest%253d%2526language%253den-US%2526stationId%253ds20407%2526is_ondemand%253dfalse%2526genre_id%253dg3124%2526class%253dtalk%25252cspoken%25252cnews%2526is_family%253dfalse%2526is_mature%253dfalse%2526country_region_id%253d227%2526station_language%253denglish%2526programId%253dp111633%2526is_event%253dfalse&url=https%3a%2f%2ftunein.com%2fdesc%2fs20407%2f&description_url=https%3a%2f%2ftunein.com%2fdesc%2fs20407%2f&ads.npa=1&ads.gdfp_req=1&aw_0_1st.playerid=ydvgH5BP&aw_0_1st.skey=1613431443&aw_0_1st.platform=tunein",
+  }
+  radio.onclick = function(e) {
+    e.preventDefault();
+    var elm = e.target;
+    var audio = document.getElementById('radio-audio');
+    audio.src = radio_mapping[elm.getAttribute('value')]
+    audio.play(); //call this to play the song right away
+  };
+</script>
